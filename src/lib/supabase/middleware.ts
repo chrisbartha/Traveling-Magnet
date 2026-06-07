@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
-export function updateSession(request: NextRequest) {
+export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request: {
       headers: request.headers,
@@ -36,7 +36,7 @@ export function updateSession(request: NextRequest) {
 
   // Refresh the session (important for keeping auth tokens valid)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  supabase.auth.getUser();
+  await supabase.auth.getUser();
 
   return supabaseResponse;
 }
